@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 class APICaller {
     static let shared = APICaller()
+    let cache = NSCache<NSString, UIImage>()
     private init() {}
+    
     func getMovies(urlString: String, completion: @escaping(([Movie]) -> ())) {
         guard let url = URL(string: urlString) else {
             return
@@ -29,5 +32,31 @@ class APICaller {
             }
             
         }.resume()
+    }
+    
+    func downloadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
+        let cacheKey = NSString(string: urlString)
+        if let image = cache.object(forKey: cacheKey) {
+            completion(image)
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self,
+                  error == nil,
+                  let response = response as? HTTPURLResponse, response.statusCode == 200,
+                  let data = data,
+                  let image = UIImage(data: data) else {
+                completion(nil)
+                return
+            }
+            cache.setObject(image, forKey: cacheKey)
+            completion(image)
+        }
+        task.resume()
     }
 }

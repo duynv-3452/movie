@@ -39,4 +39,6 @@ struct Movie: Codable {
         runtime = try value.decodeIfPresent(String.self, forKey: .runtime)
         voteAverage = try value.decodeIfPresent(Double.self, forKey: .voteAverage)
     }
+    
+    init() {}
 }

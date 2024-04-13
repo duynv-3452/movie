@@ -12,6 +12,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var popularMovies: [Movie] = []
+    var topRatedMovies: [Movie] = []
+    var upComingMovies: [Movie] = []
+    var nowPlayingMovies: [Movie] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
@@ -23,6 +27,8 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "SearchCell", bundle: nil),
+                           forCellReuseIdentifier: "SearchCell")
         tableView.register(UINib(nibName: "ListMovieTableViewCell", bundle: nil),
                            forCellReuseIdentifier: "ListMovieTableViewCell")
         tableView.register(UINib(nibName: "MovieHeader", bundle: nil),
@@ -32,11 +38,41 @@ class HomeViewController: UIViewController {
     private func getMovies() {
         let popularURL = Urls.shared.getPopularUrl()
         APICaller.shared.getMovies(urlString: popularURL) { [weak self] movies in
+            guard let self else { return }
             DispatchQueue.main.async {
-                self?.popularMovies = movies
+                self.popularMovies = movies
                 print("-----\(popularURL)")
                 print("-----\(movies.count)")
-                self?.tableView.reloadData()
+                self.tableView.reloadData()
+            }
+        }
+        
+        let topRatedURL = Urls.shared.getTopRatedUrl()
+        APICaller.shared.getMovies(urlString: topRatedURL) { [weak self] movies in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.topRatedMovies = movies
+                print("-----\(topRatedURL)")
+                print("-----\(movies.count)")
+                self.tableView.reloadData()
+            }
+        }
+        
+        let upComingURL = Urls.shared.getUpComingUrl()
+        APICaller.shared.getMovies(urlString: upComingURL) { [weak self] movies in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.upComingMovies = movies
+                self.tableView.reloadData()
+            }
+        }
+        
+        let nowPlayingURL = Urls.shared.getNowPlayingUrl()
+        APICaller.shared.getMovies(urlString: nowPlayingURL) { [weak self] movies in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.nowPlayingMovies = movies
+                self.tableView.reloadData()
             }
         }
     }
@@ -53,6 +89,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListMovieTableViewCell", for: indexPath) as! ListMovieTableViewCell
+        if indexPath.section == 0 {
+            cell.configCell(movies: popularMovies)
+        } else if indexPath.section == 1 {
+            cell.configCell(movies: topRatedMovies)
+        } else if indexPath.section == 2 {
+            cell.configCell(movies: upComingMovies)
+        } else {
+            cell.configCell(movies: nowPlayingMovies)
+        }
+        cell.tappedMovie = { [weak self] movie in
+            guard let self else { return }
+            self.toMovieDetailScreen(movie: popularMovies[indexPath.row])
+            
+        }
         return cell
     }
     
@@ -77,5 +127,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
+    }
+}
+
+extension HomeViewController {
+    func toMovieDetailScreen(movie: Movie) {
+        let vc = MovieDetailViewController()
+        vc.movie = movie
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

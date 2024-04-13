@@ -39,7 +39,7 @@ struct Urls {
     }
     
     func getImage(urlString: String) -> String {
-        let urlString = " http://image.tmdb.org/t/p/w500/\(urlString)?api_key=\(key)"
+        let urlString = "https://image.tmdb.org/t/p/w500/\(urlString)?api_key=\(key)"
         return urlString
     }
     

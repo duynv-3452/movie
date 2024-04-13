@@ -7,10 +7,10 @@
 
 import UIKit
 
-class MovieHeader: UITableViewHeaderFooterView {
+final class MovieHeader: UITableViewHeaderFooterView {
 
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var headerTitle: UILabel!
+    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet private weak var headerTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         configView()

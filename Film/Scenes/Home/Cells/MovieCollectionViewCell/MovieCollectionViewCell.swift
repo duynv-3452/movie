@@ -20,7 +20,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func configView() {
-        posterImage.image = UIImage(named: "anh_app")
+//        posterImage.image = UIImage(named: "anh_app")
         posterImage.layer.cornerRadius = 12
         posterImage.contentMode = .scaleAspectFill
         movieName.font = .systemFont(ofSize: 18)
@@ -32,6 +32,17 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieName.text = movie.title
         releaseDate.text = movie.releaseDate
         let posterImageString = Urls.shared.getImage(urlString: movie.poster ?? "")
-        let posterURL = URL(string: posterImageString)
+//        downloadImage(url: posterImageString)
+        posterImage.downloadImage(fromURL: posterImageString)
+
     }
+//
+//    func downloadImage(url: String) {
+//        APICaller.shared.downloadImage(urlString: url) { [weak self] image in
+//            guard let self else { return }
+//            DispatchQueue.main.async {
+//                self.posterImage.image = image
+//            }
+//        }
+//    }
 }

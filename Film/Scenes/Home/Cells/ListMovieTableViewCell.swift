@@ -10,14 +10,14 @@ import UIKit
 class ListMovieTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    var tappedMovie: ((Movie) -> ())?
+
     var movies = [Movie]() {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    var tappedMovie: ((Movie) -> ())?
     override func awakeFromNib() {
         super.awakeFromNib()
         configView()
