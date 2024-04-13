@@ -17,7 +17,7 @@ final class MovieHeader: UITableViewHeaderFooterView {
     }
     
     private func configView() {
-        
+        headerTitle.font = .boldSystemFont(ofSize: 22)
     }
     
     func configView(title: String) {

@@ -70,6 +70,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="IW8-cY-UFa" id="uGh-uU-wip"/>
+                <outlet property="pageView" destination="roY-h2-c7h" id="y4v-HU-Uhl"/>
                 <outlet property="recommendTitle" destination="OHU-qU-CLG" id="cHp-eL-ll0"/>
             </connections>
             <point key="canvasLocation" x="348.85496183206106" y="157.3943661971831"/>

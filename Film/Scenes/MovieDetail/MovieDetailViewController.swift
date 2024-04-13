@@ -10,12 +10,12 @@ import UIKit
 final class MovieDetailViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    private var dataSource = Movie() {
+
+    var movie: Movie? {
         didSet {
             tableView.reloadData()
         }
     }
-    var movie: Movie?
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
@@ -30,8 +30,18 @@ final class MovieDetailViewController: UIViewController {
 
     }
     
-    func prepareDatasource() {
-        self.dataSource = movie ?? Movie()
+    func loadData(movie: Movie) {
+        guard let id = movie.id else { return }
+         getMovieDetail(id: id)
+    }
+
+    private func getMovieDetail(id: Int) {
+        APICaller.shared.getMovieDetail(id: id) { [weak self] movieDetail in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.movie = movieDetail
+            }
+        }
     }
 }
 
@@ -46,12 +56,18 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailInfoCell", for: indexPath) as! MovieDetailInfoCell
+            guard let movieDetail = movie else { return UITableViewCell() }
+            cell.configCell(movie: movieDetail)
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CastTableViewCell", for: indexPath) as! CastTableViewCell
+            guard let movieDetail = movie else { return UITableViewCell() }
+            cell.prepareDatasource(data: movieDetail.credits?.cast ?? [])
             return cell
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SimilarTableViewCell", for: indexPath) as! SimilarTableViewCell
+            guard let movieDetail = movie else { return UITableViewCell() }
+            cell.configCell(data: movieDetail.similar?.results ?? [])
             return cell
         }
         return UITableViewCell()

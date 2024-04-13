@@ -14,8 +14,10 @@ struct Movie: Codable {
     var backDropPath: String?
     var releaseDate: String?
     var overview: String?
-    var runtime: String?
+    var runtime: Int?
     var voteAverage: Double?
+    var credits: Credits?
+    var similar: MovieResponse?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -26,6 +28,8 @@ struct Movie: Codable {
         case overview
         case runtime
         case voteAverage = "vote_average"
+        case credits
+        case similar
     }
     
     init(from decoder: Decoder) throws {
@@ -36,9 +40,20 @@ struct Movie: Codable {
         backDropPath = try value.decodeIfPresent(String.self, forKey: .backDropPath)
         releaseDate = try value.decodeIfPresent(String.self, forKey: .releaseDate)
         overview = try value.decodeIfPresent(String.self, forKey: .overview)
-        runtime = try value.decodeIfPresent(String.self, forKey: .runtime)
+        runtime = try value.decodeIfPresent(Int.self, forKey: .runtime)
         voteAverage = try value.decodeIfPresent(Double.self, forKey: .voteAverage)
+        credits = try value.decodeIfPresent(Credits.self, forKey: .credits)
+        similar = try value.decodeIfPresent(MovieResponse.self, forKey: .similar)
     }
     
-    init() {}
+    init() {
+        id = nil
+        title = nil
+        poster = nil
+        backDropPath = nil
+        releaseDate = nil
+        overview = nil
+        runtime = nil
+        voteAverage = nil
+    }
 }

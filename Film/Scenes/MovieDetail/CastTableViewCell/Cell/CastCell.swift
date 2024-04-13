@@ -25,6 +25,8 @@ final class CastCell: UICollectionViewCell {
         containerView.layer.borderColor = UIColor.secondaryLabel.cgColor
         
         posterImageView.layer.cornerCurve = .continuous
+        posterImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        posterImageView.layer.cornerRadius = 12
         posterImageView.clipsToBounds = true
         
         castNameLabel.font = .systemFont(ofSize: 18)
@@ -36,8 +38,16 @@ final class CastCell: UICollectionViewCell {
     }
     
     func configCell(info: Cast) {
-        let posterURl = Urls.shared.getImage(urlString: info.profilePath ?? "")
-        posterImageView.downloadImage(fromURL: posterURl)
+//        let posterURl = Urls.shared.getImage(urlString: info.profilePath ?? "")
+//        posterImageView.downloadImage(fromURL: posterURl)
+        
+        if let profilePath = info.profilePath, !profilePath.isEmpty {
+              let posterURl = Urls.shared.getImage(urlString: profilePath)
+              posterImageView.downloadImage(fromURL: posterURl)
+          } else {
+              // Gán ảnh mặc định vào `posterImageView` nếu `profilePath` rỗng
+              posterImageView.image = UIImage(named: "default_profile")
+          }
         castNameLabel.text = info.name
         originNameLabel.text = info.originalName
         
