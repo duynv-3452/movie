@@ -80,7 +80,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,36 +88,69 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListMovieTableViewCell", for: indexPath) as! ListMovieTableViewCell
         if indexPath.section == 0 {
-            cell.configCell(movies: popularMovies)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! SearchCell
+            cell.tappedSearch = { [weak self] in
+                guard let self else { return }
+                self.toSearchMovieScreen()
+            }
+            return cell
         } else if indexPath.section == 1 {
-            cell.configCell(movies: topRatedMovies)
-        } else if indexPath.section == 2 {
-            cell.configCell(movies: upComingMovies)
-        } else {
-            cell.configCell(movies: nowPlayingMovies)
-        }
-        cell.tappedMovie = { [weak self] movie in
-            guard let self else { return }
-            self.toMovieDetailScreen(movie: movie)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ListMovieTableViewCell", for: indexPath) as! ListMovieTableViewCell
+            cell.configCell(movies: popularMovies)
+            cell.tappedMovie = { [weak self] movie in
+                guard let self else { return }
+                self.toMovieDetailScreen(movie: movie)
+            }
+            return cell
             
+        } else if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ListMovieTableViewCell", for: indexPath) as! ListMovieTableViewCell
+            cell.configCell(movies: topRatedMovies)
+            cell.tappedMovie = { [weak self] movie in
+                guard let self else { return }
+                self.toMovieDetailScreen(movie: movie)
+            }
+            return cell
+            
+        } else if indexPath.section == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ListMovieTableViewCell", for: indexPath) as! ListMovieTableViewCell
+            cell.configCell(movies: upComingMovies)
+            cell.tappedMovie = { [weak self] movie in
+                guard let self else { return }
+                self.toMovieDetailScreen(movie: movie)
+            }
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ListMovieTableViewCell", for: indexPath) as! ListMovieTableViewCell
+            cell.configCell(movies: nowPlayingMovies)
+            cell.tappedMovie = { [weak self] movie in
+                guard let self else { return }
+                self.toMovieDetailScreen(movie: movie)
+            }
+            return cell
         }
-
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 290
+        if indexPath.section == 0 {
+            return 180
+        } else {
+            return 290
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let movieHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MovieHeader") as! MovieHeader
         if section == 0 {
-            movieHeader.configView(title: "Popular")
+//            movieHeader.configView(title: "Welcome")
+            return nil
         } else if section == 1 {
+            movieHeader.configView(title: "Popular")
+        } else if section == 2 {
             movieHeader.configView(title: "Top Rated")
-        } else if section == 2{
+        } else if section == 3{
             movieHeader.configView(title: "Up coming")
 
         } else {
@@ -127,14 +160,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
-    }
+        if section == 0 {
+            return 0
+        } else {
+            return 44
+        }    }
 }
 
 extension HomeViewController {
     func toMovieDetailScreen(movie: Movie) {
         let vc = MovieDetailViewController()
         vc.loadData(movie: movie)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func toSearchMovieScreen() {
+        let vc = SearchViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }

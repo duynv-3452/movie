@@ -54,6 +54,29 @@ class APICaller {
         }.resume()
     }
     
+    func searchMovie(query: String, page: Int, completion: @escaping (([Movie]) -> ())) {
+        let urlString = Urls.shared.getSearchUrl(query: query, page: page)
+        print("------\(urlString)")
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            let decoder = JSONDecoder()
+            
+            do {
+                guard let data = data else { return }
+                let moviesResponse = try decoder.decode(MovieResponse.self, from: data)
+                let listMovie: [Movie] = moviesResponse.results ?? []
+                completion(listMovie)
+            } catch let error {
+                print("Error: \(error)")
+                
+            }
+            
+        }.resume()
+    }
+    
     func downloadImage(urlString: String, completion: @escaping (UIImage?) -> Void) {
         let cacheKey = NSString(string: urlString)
         if let image = cache.object(forKey: cacheKey) {
