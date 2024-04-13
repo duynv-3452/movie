@@ -11,8 +11,8 @@ class SimilarTableViewCell: UITableViewCell {
 
     @IBOutlet weak var recommendTitle: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var pageView: UIPageControl!
+    var tappedSimilar: ((Movie) -> Void)?
     private var dataSource = [Movie]() {
         didSet {
             collectionView.reloadData()
@@ -54,6 +54,9 @@ extension SimilarTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrailerCell", for: indexPath) as! TrailerCell
         cell.configSimilarCell(movie: dataSource[indexPath.row])
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        tappedSimilar?(dataSource[indexPath.row])
     }
 }
 

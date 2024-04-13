@@ -68,8 +68,20 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "SimilarTableViewCell", for: indexPath) as! SimilarTableViewCell
             guard let movieDetail = movie else { return UITableViewCell() }
             cell.configCell(data: movieDetail.similar?.results ?? [])
+            cell.tappedSimilar = { [weak self] movie in
+                guard let self else { return }
+                self.toMovieDetailScreen(movie: movie)
+            }
             return cell
         }
         return UITableViewCell()
+    }
+}
+
+extension MovieDetailViewController {
+    func toMovieDetailScreen(movie: Movie) {
+        let vc = MovieDetailViewController()
+        vc.loadData(movie: movie)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

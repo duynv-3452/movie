@@ -29,7 +29,7 @@ final class CastCell: UICollectionViewCell {
         posterImageView.layer.cornerRadius = 12
         posterImageView.clipsToBounds = true
         
-        castNameLabel.font = .systemFont(ofSize: 18)
+        castNameLabel.font = .boldSystemFont(ofSize: 18)
         castNameLabel.textColor = .secondaryLabel
         
         originNameLabel.font = .systemFont(ofSize: 12)
