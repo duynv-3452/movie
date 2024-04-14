@@ -95,6 +95,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="searchButton" destination="KoF-tl-frj" id="Fl1-lY-rkM"/>
+                <outlet property="searchImageView" destination="vUV-0L-ZNW" id="hP6-le-WbA"/>
                 <outlet property="searchPlaceholder" destination="heC-6q-LHL" id="oDJ-BS-1m4"/>
                 <outlet property="searchView" destination="KXU-dx-C3R" id="sh8-WK-ngv"/>
             </connections>

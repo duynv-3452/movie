@@ -10,6 +10,7 @@ import UIKit
 final class SearchCell: UITableViewCell {
 
     @IBOutlet private weak var searchView: UIView!
+    @IBOutlet private weak var searchImageView: UIImageView!
     @IBOutlet private weak var searchPlaceholder: UILabel!
     @IBOutlet private weak var searchButton: UIButton!
     
