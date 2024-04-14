@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0475AD302BCB526D0058CE28 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475AD2F2BCB526D0058CE28 /* UIViewController+Extension.swift */; };
+		0475AD322BCB5B240058CE28 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475AD312BCB5B240058CE28 /* Enum.swift */; };
+		0475AD342BCB64490058CE28 /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475AD332BCB64490058CE28 /* Videos.swift */; };
+		0475AD392BCB76A60058CE28 /* TrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475AD372BCB76A60058CE28 /* TrailerViewController.swift */; };
+		0475AD3A2BCB76A60058CE28 /* TrailerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0475AD382BCB76A60058CE28 /* TrailerViewController.xib */; };
 		0492E04D2BC97C4D00DEE324 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492E04C2BC97C4D00DEE324 /* UIImageView+Extension.swift */; };
 		0492E0522BC9E46700DEE324 /* CastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492E0502BC9E46700DEE324 /* CastTableViewCell.swift */; };
 		0492E0532BC9E46700DEE324 /* CastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492E0512BC9E46700DEE324 /* CastTableViewCell.xib */; };
@@ -52,6 +57,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0475AD2F2BCB526D0058CE28 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		0475AD312BCB5B240058CE28 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		0475AD332BCB64490058CE28 /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
+		0475AD372BCB76A60058CE28 /* TrailerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerViewController.swift; sourceTree = "<group>"; };
+		0475AD382BCB76A60058CE28 /* TrailerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailerViewController.xib; sourceTree = "<group>"; };
 		0492E04C2BC97C4D00DEE324 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		0492E0502BC9E46700DEE324 /* CastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTableViewCell.swift; sourceTree = "<group>"; };
 		0492E0512BC9E46700DEE324 /* CastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastTableViewCell.xib; sourceTree = "<group>"; };
@@ -109,10 +119,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0475AD352BCB767D0058CE28 /* Trailer */ = {
+			isa = PBXGroup;
+			children = (
+				0475AD372BCB76A60058CE28 /* TrailerViewController.swift */,
+				0475AD382BCB76A60058CE28 /* TrailerViewController.xib */,
+			);
+			path = Trailer;
+			sourceTree = "<group>";
+		};
 		0492E04B2BC97C3900DEE324 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0492E04C2BC97C4D00DEE324 /* UIImageView+Extension.swift */,
+				0475AD2F2BCB526D0058CE28 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -203,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				04F1EEB72BCA0C37004F58E5 /* AppColor.swift */,
+				0475AD312BCB5B240058CE28 /* Enum.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -243,6 +264,7 @@
 		C96E135D2BBF9B20007DF687 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0475AD352BCB767D0058CE28 /* Trailer */,
 				04C977232BCA9773009194D0 /* Search */,
 				C96E135E2BBF9B27007DF687 /* Storyboard */,
 				C96E135F2BBF9B33007DF687 /* Home */,
@@ -323,6 +345,7 @@
 				C96E13722BBF9BB3007DF687 /* Movie.swift */,
 				04F1EEB92BCA0C90004F58E5 /* Cast.swift */,
 				04F1EEBD2BCA12EC004F58E5 /* Credit.swift */,
+				0475AD332BCB64490058CE28 /* Videos.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -437,6 +460,7 @@
 				04C9772C2BCA9878009194D0 /* SearchMovieCell.xib in Resources */,
 				04E5CBD32BC93A5A00D62B81 /* CastCell.xib in Resources */,
 				04C977222BCA480E009194D0 /* TrailerCell.xib in Resources */,
+				0475AD3A2BCB76A60058CE28 /* TrailerViewController.xib in Resources */,
 				C96E134E2BBF9B09007DF687 /* Base in Resources */,
 				04E5CBCF2BC933A100D62B81 /* MovieDetailInfoCell.xib in Resources */,
 				C96E13892BBF9FE1007DF687 /* MovieCollectionViewCell.xib in Resources */,
@@ -453,17 +477,21 @@
 				C96E13852BBF9FB0007DF687 /* ListMovieTableViewCell.swift in Sources */,
 				C96E138E2BBFA011007DF687 /* MovieDetailViewController.swift in Sources */,
 				C96E136E2BBF9B95007DF687 /* Urls.swift in Sources */,
+				0475AD342BCB64490058CE28 /* Videos.swift in Sources */,
 				C96E13632BBF9B56007DF687 /* HomeViewController.swift in Sources */,
+				0475AD302BCB526D0058CE28 /* UIViewController+Extension.swift in Sources */,
 				C96E13702BBF9B9F007DF687 /* APICaller.swift in Sources */,
 				C96E13672BBF9B67007DF687 /* AccountViewController.swift in Sources */,
 				04E5CBCE2BC933A100D62B81 /* MovieDetailInfoCell.swift in Sources */,
 				C96E13512BBF9B09007DF687 /* Film.xcdatamodeld in Sources */,
+				0475AD322BCB5B240058CE28 /* Enum.swift in Sources */,
 				04C977262BCA979E009194D0 /* SearchViewController.swift in Sources */,
 				C96E137D2BBF9ED4007DF687 /* MovieHeader.swift in Sources */,
 				04F1EEB82BCA0C37004F58E5 /* AppColor.swift in Sources */,
 				C96E13472BBF9B09007DF687 /* AppDelegate.swift in Sources */,
 				C96E13652BBF9B5F007DF687 /* FavoriteViewController.swift in Sources */,
 				C96E13492BBF9B09007DF687 /* SceneDelegate.swift in Sources */,
+				0475AD392BCB76A60058CE28 /* TrailerViewController.swift in Sources */,
 				04C9772B2BCA9878009194D0 /* SearchMovieCell.swift in Sources */,
 				C96E13752BBF9BBD007DF687 /* MovieResponse.swift in Sources */,
 				0492E0562BC9E47A00DEE324 /* SimilarTableViewCell.swift in Sources */,

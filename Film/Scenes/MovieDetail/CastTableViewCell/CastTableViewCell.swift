@@ -12,6 +12,8 @@ class CastTableViewCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var castTitle: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var pageView: UIPageControl!
     private var dataSource = [Cast]() {
         didSet {
             collectionView.reloadData()
@@ -24,6 +26,9 @@ class CastTableViewCell: UITableViewCell {
     }
     
     private func configView() {
+        pageView.isUserInteractionEnabled = false
+        pageView.currentPageIndicatorTintColor = .white
+        pageView.pageIndicatorTintColor = .gray
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 8
@@ -39,6 +44,7 @@ class CastTableViewCell: UITableViewCell {
     
     func prepareDatasource(data: [Cast]) {
         self.dataSource = data
+        self.pageView.numberOfPages = data.count
     }
 }
 
@@ -51,5 +57,16 @@ extension CastTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCell", for: indexPath) as! CastCell
         cell.configCell(info: dataSource[indexPath.row])
         return cell
+    }
+}
+
+extension CastTableViewCell {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var visibleRect = CGRect()
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        guard let indexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
+        pageView.currentPage = indexPath.row
     }
 }

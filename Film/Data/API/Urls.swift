@@ -45,7 +45,7 @@ struct Urls {
 
     
     func getMovieDetailUrl(id: Int) -> String {
-        return baseUrl + "/movie/\(id)?api_key=\(key)&append_to_response=credits,similar"
+        return baseUrl + "/movie/\(id)?api_key=\(key)&append_to_response=credits,similar,videos"
     }
     
     func getSearchUrl(query: String, page: Int) -> String {

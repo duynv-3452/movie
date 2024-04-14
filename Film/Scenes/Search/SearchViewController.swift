@@ -31,11 +31,13 @@ class SearchViewController: UIViewController {
     }
     
     private func searchMovie(name: String, page: Int) {
+        loading(true)
         APICaller.shared.searchMovie(query: name, page: page) { [weak self] movies in
             guard let self else { return }
             DispatchQueue.main.async {
                 self.dataSource = movies
             }
+            self.loading(false)
         }
     }
 }
@@ -50,6 +52,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configCell(movie: dataSource[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        toMovieDetailScreen(movie: dataSource[indexPath.row])
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -59,5 +65,13 @@ extension SearchViewController: UISearchBarDelegate {
         } else {
             searchMovie(name: searchText, page: 1)
         }
+    }
+}
+
+extension SearchViewController {
+    func toMovieDetailScreen(movie: Movie) {
+        let vc = MovieDetailViewController()
+        vc.loadData(movie: movie)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

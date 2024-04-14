@@ -24,6 +24,7 @@ final class MovieDetailViewController: UIViewController {
     private func configView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "MovieDetailInfoCell", bundle: nil), forCellReuseIdentifier: "MovieDetailInfoCell")
         tableView.register(UINib(nibName: "CastTableViewCell", bundle: nil), forCellReuseIdentifier: "CastTableViewCell")
         tableView.register(UINib(nibName: "SimilarTableViewCell", bundle: nil), forCellReuseIdentifier: "SimilarTableViewCell")
@@ -36,11 +37,13 @@ final class MovieDetailViewController: UIViewController {
     }
 
     private func getMovieDetail(id: Int) {
+        loading(true)
         APICaller.shared.getMovieDetail(id: id) { [weak self] movieDetail in
             guard let self else { return }
             DispatchQueue.main.async {
                 self.movie = movieDetail
             }
+            self.loading(false)
         }
     }
 }
@@ -58,11 +61,15 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailInfoCell", for: indexPath) as! MovieDetailInfoCell
             guard let movieDetail = movie else { return UITableViewCell() }
             cell.configCell(movie: movieDetail)
+            cell.selectionStyle = .none
+
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CastTableViewCell", for: indexPath) as! CastTableViewCell
             guard let movieDetail = movie else { return UITableViewCell() }
             cell.prepareDatasource(data: movieDetail.credits?.cast ?? [])
+            cell.selectionStyle = .none
+
             return cell
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SimilarTableViewCell", for: indexPath) as! SimilarTableViewCell
@@ -72,6 +79,8 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
                 guard let self else { return }
                 self.toMovieDetailScreen(movie: movie)
             }
+            cell.selectionStyle = .none
+
             return cell
         }
         return UITableViewCell()
