@@ -54,6 +54,26 @@ class APICaller {
         }.resume()
     }
     
+    func getActorDetail(id: Int, completion: @escaping ((Actor) -> Void?)) {
+        let urlString = Urls.shared.getActorDetailUrl(id: id)
+        print("-------\(urlString)")
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+        let decoder = JSONDecoder()
+            do {
+                guard let data = data else { return }
+                let actorDetail = try decoder.decode(Actor.self, from: data)
+                completion(actorDetail)
+            } catch let error {
+                print("Error:\(error)")
+            }
+        }.resume()
+        
+    }
+    
     func searchMovie(query: String, page: Int, completion: @escaping (([Movie]) -> ())) {
         let urlString = Urls.shared.getSearchUrl(query: query, page: page)
         print("------\(urlString)")
