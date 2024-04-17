@@ -11,6 +11,7 @@ final class MovieHeader: UITableViewHeaderFooterView {
 
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var headerTitle: UILabel!
+    var showMoreTapped: (() -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         configView()
@@ -22,5 +23,9 @@ final class MovieHeader: UITableViewHeaderFooterView {
     
     func configView(title: String) {
         headerTitle.text = title
+    }
+    
+    @IBAction func tappedShowMore(_ sender: Any) {
+        showMoreTapped?()
     }
 }

@@ -26,6 +26,8 @@ struct Actor: Codable {
         case knownFor = "known_for_department"
         case movieCredits = "movie_credits"
     }
+    init() {}
+
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

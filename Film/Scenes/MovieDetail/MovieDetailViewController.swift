@@ -68,6 +68,10 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "CastTableViewCell", for: indexPath) as! CastTableViewCell
             guard let movieDetail = movie else { return UITableViewCell() }
             cell.prepareDatasource(data: movieDetail.credits?.cast ?? [])
+            cell.tappedCast = { [weak self] cast in
+                guard let self else { return }
+                self.toActorDetailScreen(cast: cast)
+            }
             cell.selectionStyle = .none
 
             return cell
@@ -91,6 +95,12 @@ extension MovieDetailViewController {
     func toMovieDetailScreen(movie: Movie) {
         let vc = MovieDetailViewController()
         vc.loadData(movie: movie)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func toActorDetailScreen(cast: Cast) {
+        let vc = ActorViewController()
+        vc.idActor = cast.id
         navigationController?.pushViewController(vc, animated: true)
     }
 }

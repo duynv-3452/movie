@@ -14,6 +14,8 @@ class CastTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var pageView: UIPageControl!
+    var tappedCast: ((Cast) -> Void)?
+
     private var dataSource = [Cast]() {
         didSet {
             collectionView.reloadData()
@@ -57,6 +59,10 @@ extension CastTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCell", for: indexPath) as! CastCell
         cell.configCell(info: dataSource[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        tappedCast?(dataSource[indexPath.row])
     }
 }
 

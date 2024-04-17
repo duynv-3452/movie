@@ -156,6 +156,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             movieHeader.configView(title: "Now playing")
         }
+        movieHeader.showMoreTapped = { [weak self] in
+               guard let self = self else { return }
+               let vc = ListMovieViewController()
+               // Thực hiện các cài đặt cần thiết cho ListMovieViewController
+               self.navigationController?.pushViewController(vc, animated: true)
+           }
         return movieHeader
     }
     

@@ -12,6 +12,8 @@
 		0475AD342BCB64490058CE28 /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475AD332BCB64490058CE28 /* Videos.swift */; };
 		0475AD392BCB76A60058CE28 /* TrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475AD372BCB76A60058CE28 /* TrailerViewController.swift */; };
 		0475AD3A2BCB76A60058CE28 /* TrailerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0475AD382BCB76A60058CE28 /* TrailerViewController.xib */; };
+		0488AB3D2BCF9BC0003BAE59 /* ListMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0488AB3B2BCF9BC0003BAE59 /* ListMovieViewController.swift */; };
+		0488AB3E2BCF9BC0003BAE59 /* ListMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488AB3C2BCF9BC0003BAE59 /* ListMovieViewController.xib */; };
 		0492E04D2BC97C4D00DEE324 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492E04C2BC97C4D00DEE324 /* UIImageView+Extension.swift */; };
 		0492E0522BC9E46700DEE324 /* CastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492E0502BC9E46700DEE324 /* CastTableViewCell.swift */; };
 		0492E0532BC9E46700DEE324 /* CastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492E0512BC9E46700DEE324 /* CastTableViewCell.xib */; };
@@ -70,6 +72,8 @@
 		0475AD332BCB64490058CE28 /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
 		0475AD372BCB76A60058CE28 /* TrailerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerViewController.swift; sourceTree = "<group>"; };
 		0475AD382BCB76A60058CE28 /* TrailerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailerViewController.xib; sourceTree = "<group>"; };
+		0488AB3B2BCF9BC0003BAE59 /* ListMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovieViewController.swift; sourceTree = "<group>"; };
+		0488AB3C2BCF9BC0003BAE59 /* ListMovieViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListMovieViewController.xib; sourceTree = "<group>"; };
 		0492E04C2BC97C4D00DEE324 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		0492E0502BC9E46700DEE324 /* CastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTableViewCell.swift; sourceTree = "<group>"; };
 		0492E0512BC9E46700DEE324 /* CastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastTableViewCell.xib; sourceTree = "<group>"; };
@@ -142,6 +146,15 @@
 				0475AD382BCB76A60058CE28 /* TrailerViewController.xib */,
 			);
 			path = Trailer;
+			sourceTree = "<group>";
+		};
+		0488AB3A2BCF9BA1003BAE59 /* ListMovie */ = {
+			isa = PBXGroup;
+			children = (
+				0488AB3B2BCF9BC0003BAE59 /* ListMovieViewController.swift */,
+				0488AB3C2BCF9BC0003BAE59 /* ListMovieViewController.xib */,
+			);
+			path = ListMovie;
 			sourceTree = "<group>";
 		};
 		0492E04B2BC97C3900DEE324 /* Extensions */ = {
@@ -289,6 +302,7 @@
 		C96E135D2BBF9B20007DF687 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0488AB3A2BCF9BA1003BAE59 /* ListMovie */,
 				C9B1C8E22BCE9AD300880CD4 /* Actor */,
 				0475AD352BCB767D0058CE28 /* Trailer */,
 				04C977232BCA9773009194D0 /* Search */,
@@ -507,6 +521,7 @@
 				C96E138D2BBFA011007DF687 /* MovieDetailViewController.xib in Resources */,
 				0492E0572BC9E47A00DEE324 /* SimilarTableViewCell.xib in Resources */,
 				C96E13532BBF9B0A007DF687 /* Assets.xcassets in Resources */,
+				0488AB3E2BCF9BC0003BAE59 /* ListMovieViewController.xib in Resources */,
 				C9B1C8ED2BCEAA7A00880CD4 /* ActorInfoCell.xib in Resources */,
 				C9B1C8E62BCE9AE500880CD4 /* ActorViewController.xib in Resources */,
 				0492E0532BC9E46700DEE324 /* CastTableViewCell.xib in Resources */,
@@ -564,6 +579,7 @@
 				04F1EEBE2BCA12EC004F58E5 /* Credit.swift in Sources */,
 				0492E0522BC9E46700DEE324 /* CastTableViewCell.swift in Sources */,
 				0492E04D2BC97C4D00DEE324 /* UIImageView+Extension.swift in Sources */,
+				0488AB3D2BCF9BC0003BAE59 /* ListMovieViewController.swift in Sources */,
 				04C977212BCA480E009194D0 /* TrailerCell.swift in Sources */,
 				04E5CBC92BC8EBA500D62B81 /* SearchCell.swift in Sources */,
 				C9B1C8EC2BCEAA7A00880CD4 /* ActorInfoCell.swift in Sources */,

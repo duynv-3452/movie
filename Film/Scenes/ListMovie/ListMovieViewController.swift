@@ -1,44 +1,44 @@
 //
-//  ActorMovieCell.swift
+//  ListMovieViewController.swift
 //  Film
 //
-//  Created by nguyen.van.duyb on 4/16/24.
+//  Created by Duy Nguyễn on 17/04/2024.
 //
 
 import UIKit
 
-final class ActorMovieCell: UITableViewCell {
+class ListMovieViewController: UIViewController {
 
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     var movies = [Movie]() {
         didSet {
             collectionView.reloadData()
         }
     }
-    var tappedMovie: ((Movie) -> ())?
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         configView()
     }
     
     private func configView() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 160, height: 290)
-        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 3 , height: 290)
+        layout.scrollDirection = .vertical
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieCollectionViewCell")
     }
     
+    
     public func configCell(movies: [Movie]) {
         self.movies = movies
     }
-
 }
 
-extension ActorMovieCell: UICollectionViewDelegate, UICollectionViewDataSource {
+
+extension ListMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
@@ -48,8 +48,8 @@ extension ActorMovieCell: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.configCell(movie: movies[indexPath.row])
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        tappedMovie?(movies[indexPath.row])
-    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        tappedMovie?(movies[indexPath.row])
+//    }
 }
